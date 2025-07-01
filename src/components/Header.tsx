@@ -15,7 +15,7 @@ const Header: React.FC<HeaderProps> = ({ onViewChange, user, onLogin, currentVie
 
   const navigationItems = [
     { label: 'Home', view: 'home', icon: null },
-    { label: 'Destinations', view: 'destination', icon: MapPin },
+    { label: 'Destinations', view: 'destinations', icon: MapPin },
     { label: 'Search', view: 'search', icon: Search },
     { label: 'Trip Planner', view: 'trip-planner', icon: PlaneTakeoff },
   ];
