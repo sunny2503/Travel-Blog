@@ -10,14 +10,14 @@ const FeaturedDestinations: React.FC<FeaturedDestinationsProps> = ({ onViewDesti
   const destinations: DestinationType[] = [
     {
       id: '1',
-      name: 'Santorini',
-      country: 'Greece',
-      image: 'https://images.pexels.com/photos/161901/santorini-travel-tour-vacation-161901.jpeg?auto=compress&cs=tinysrgb&w=800',
-      description: 'Famous for its stunning sunsets, white-washed buildings, and crystal-clear waters.',
-      highlights: ['Iconic Blue Domes', 'Volcanic Beaches', 'Wine Tasting', 'Sunset Views'],
-      bestTime: 'April - October',
+      name: 'Barcelona',
+      country: 'Spain',
+      image: 'https://images.pexels.com/photos/1388030/pexels-photo-1388030.jpeg?auto=compress&cs=tinysrgb&w=800',
+      description: 'A vibrant city known for its unique architecture, rich culture, and Mediterranean charm.',
+      highlights: ['Sagrada Familia', 'Gothic Quarter', 'Beach Life', 'Tapas Culture'],
+      bestTime: 'March - October',
       rating: 4.8,
-      guides: 24
+      guides: 28
     },
     {
       id: '2',

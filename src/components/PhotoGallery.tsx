@@ -17,10 +17,10 @@ const PhotoGallery: React.FC = () => {
   const photos: PhotoType[] = [
     {
       id: '1',
-      url: 'https://images.pexels.com/photos/1118873/pexels-photo-1118873.jpeg?auto=compress&cs=tinysrgb&w=800',
-      caption: 'Golden sunset over Santorini\'s iconic blue domes',
-      location: 'Santorini, Greece',
-      photographer: 'Elena Vasquez'
+      url: 'https://images.pexels.com/photos/1388030/pexels-photo-1388030.jpeg?auto=compress&cs=tinysrgb&w=800',
+      caption: 'Magnificent Sagrada Familia cathedral in Barcelona',
+      location: 'Barcelona, Spain',
+      photographer: 'Carlos Rodriguez'
     },
     {
       id: '2',

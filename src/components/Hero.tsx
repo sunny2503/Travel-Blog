@@ -7,10 +7,10 @@ const Hero: React.FC = () => {
 
   const heroSlides = [
     {
-      image: 'https://images.pexels.com/photos/1118873/pexels-photo-1118873.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080',
+      image: 'https://images.pexels.com/photos/1388030/pexels-photo-1388030.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080',
       title: 'Discover Hidden Gems',
       subtitle: 'Explore breathtaking destinations around the world',
-      location: 'Santorini, Greece'
+      location: 'Barcelona, Spain'
     },
     {
       image: 'https://images.pexels.com/photos/1285625/pexels-photo-1285625.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080',

@@ -9,20 +9,20 @@ const DestinationGuide: React.FC<DestinationGuideProps> = ({ onBack }) => {
   const [activeTab, setActiveTab] = useState('overview');
 
   const destination = {
-    name: 'Santorini',
-    country: 'Greece',
+    name: 'Barcelona',
+    country: 'Spain',
     rating: 4.8,
-    image: 'https://images.pexels.com/photos/161901/santorini-travel-tour-vacation-161901.jpeg?auto=compress&cs=tinysrgb&w=1200',
-    description: 'A stunning Greek island in the Aegean Sea, famous for its dramatic cliffs, stunning sunsets, white-washed buildings, and crystal-clear waters.',
-    bestTime: 'April - October',
-    temperature: '20-28°C',
+    image: 'https://images.pexels.com/photos/1388030/pexels-photo-1388030.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    description: 'A vibrant Mediterranean city known for its unique architecture, rich culture, beautiful beaches, and world-class cuisine.',
+    bestTime: 'March - October',
+    temperature: '15-30°C',
     highlights: [
-      'Iconic Blue Domes',
-      'Volcanic Beaches',
-      'Wine Tasting',
-      'Sunset Views',
-      'Traditional Villages',
-      'Archaeological Sites'
+      'Sagrada Familia',
+      'Gothic Quarter',
+      'Beach Life',
+      'Tapas Culture',
+      'Park Güell',
+      'La Rambla'
     ],
     budget: {
       budget: '$50-80/day',
@@ -41,46 +41,46 @@ const DestinationGuide: React.FC<DestinationGuideProps> = ({ onBack }) => {
 
   const attractions = [
     {
-      name: 'Oia Village',
-      image: 'https://images.pexels.com/photos/1285625/pexels-photo-1285625.jpeg?auto=compress&cs=tinysrgb&w=400',
-      description: 'Famous for its stunning sunsets and blue-domed churches',
+      name: 'Sagrada Familia',
+      image: 'https://images.pexels.com/photos/1388030/pexels-photo-1388030.jpeg?auto=compress&cs=tinysrgb&w=400',
+      description: 'Gaudí\'s masterpiece cathedral with stunning architecture',
       rating: 4.9,
       duration: '2-3 hours'
     },
     {
-      name: 'Red Beach',
-      image: 'https://images.pexels.com/photos/2467558/pexels-photo-2467558.jpeg?auto=compress&cs=tinysrgb&w=400',
-      description: 'Unique red volcanic sand beach with dramatic cliffs',
-      rating: 4.6,
-      duration: '1-2 hours'
+      name: 'Park Güell',
+      image: 'https://images.pexels.com/photos/1388030/pexels-photo-1388030.jpeg?auto=compress&cs=tinysrgb&w=400',
+      description: 'Whimsical park with colorful mosaics and city views',
+      rating: 4.7,
+      duration: '2-3 hours'
     },
     {
-      name: 'Akrotiri Archaeological Site',
-      image: 'https://images.pexels.com/photos/3601425/pexels-photo-3601425.jpeg?auto=compress&cs=tinysrgb&w=400',
-      description: 'Ancient Minoan city preserved by volcanic ash',
-      rating: 4.5,
-      duration: '1.5 hours'
+      name: 'Gothic Quarter',
+      image: 'https://images.pexels.com/photos/1388030/pexels-photo-1388030.jpeg?auto=compress&cs=tinysrgb&w=400',
+      description: 'Medieval neighborhood with narrow streets and historic buildings',
+      rating: 4.6,
+      duration: '3-4 hours'
     }
   ];
 
   const foods = [
     {
-      name: 'Fresh Seafood',
+      name: 'Tapas',
       image: 'https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=400',
-      description: 'Grilled octopus, sea bream, and lobster pasta',
-      price: '€15-30'
+      description: 'Patatas bravas, jamón ibérico, and croquetas',
+      price: '€8-20'
     },
     {
-      name: 'Santorini Wine',
+      name: 'Catalan Cuisine',
       image: 'https://images.pexels.com/photos/3616956/pexels-photo-3616956.jpeg?auto=compress&cs=tinysrgb&w=400',
-      description: 'Assyrtiko white wine and Vinsanto dessert wine',
-      price: '€8-25'
+      description: 'Paella, fideuà, and crema catalana',
+      price: '€15-35'
     },
     {
-      name: 'Traditional Greek',
+      name: 'Fresh Seafood',
       image: 'https://images.pexels.com/photos/1213710/pexels-photo-1213710.jpeg?auto=compress&cs=tinysrgb&w=400',
-      description: 'Moussaka, souvlaki, and Greek salad',
-      price: '€10-18'
+      description: 'Grilled fish, seafood paella, and fideuà',
+      price: '€20-40'
     }
   ];
 
@@ -90,10 +90,10 @@ const DestinationGuide: React.FC<DestinationGuideProps> = ({ onBack }) => {
         return (
           <div className="space-y-8">
             <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">About Santorini</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">About Barcelona</h3>
               <p className="text-gray-600 leading-relaxed">
-                {destination.description} This volcanic island offers a unique blend of natural beauty, 
-                rich history, and authentic Greek culture that captivates every visitor.
+                {destination.description} This cosmopolitan city offers a perfect blend of historic charm, 
+                modern innovation, and Mediterranean lifestyle that enchants every visitor.
               </p>
             </div>
 
