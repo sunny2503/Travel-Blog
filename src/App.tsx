@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import FeaturedDestinations from './components/FeaturedDestinations';
@@ -11,17 +11,25 @@ import DestinationGuide from './components/DestinationGuide';
 import Search from './components/Search';
 import TripPlanner from './components/TripPlanner';
 import UserProfile from './components/UserProfile';
-import { BlogPostType } from './types';
+import { BlogPostType, DestinationType } from './types';
 
 function App() {
   const [currentView, setCurrentView] = useState<string>('home');
   const [selectedPost, setSelectedPost] = useState<BlogPostType | null>(null);
+  const [selectedDestination, setSelectedDestination] = useState<DestinationType | null>(null);
   const [user, setUser] = useState<any>(null);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentView]);
 
   const handleViewChange = (view: string, data?: any) => {
     setCurrentView(view);
-    if (data) {
+    if (view === 'blog-post') {
       setSelectedPost(data);
+    }
+    if (view === 'destination') {
+      setSelectedDestination(data);
     }
   };
 
@@ -35,7 +43,9 @@ function App() {
       case 'blog-post':
         return selectedPost ? <BlogPost post={selectedPost} onBack={() => setCurrentView('home')} /> : null;
       case 'destination':
-        return <DestinationGuide onBack={() => setCurrentView('home')} />;
+        return selectedDestination ? <DestinationGuide destination={selectedDestination} onBack={() => setCurrentView('home')} /> : null;
+      case 'destinations':
+        return <FeaturedDestinations onViewDestination={(destination) => handleViewChange('destination', destination)} />;
       case 'search':
         return <Search onBack={() => setCurrentView('home')} onViewPost={handleViewChange} />;
       case 'trip-planner':
@@ -46,7 +56,7 @@ function App() {
         return (
           <>
             <Hero />
-            <FeaturedDestinations onViewDestination={() => handleViewChange('destination')} />
+            <FeaturedDestinations onViewDestination={(destination) => handleViewChange('destination', destination)} />
             <BlogPosts onViewPost={handleViewChange} />
             <PhotoGallery />
             <Newsletter />

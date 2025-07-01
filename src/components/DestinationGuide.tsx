@@ -1,35 +1,14 @@
 import React, { useState } from 'react';
 import { ArrowLeft, Star, MapPin, Calendar, Thermometer, Camera, Utensils, Bed, Car, Download, Heart, Share2 } from 'lucide-react';
+import { DestinationType } from '../types';
 
 interface DestinationGuideProps {
+  destination: DestinationType;
   onBack: () => void;
 }
 
-const DestinationGuide: React.FC<DestinationGuideProps> = ({ onBack }) => {
+const DestinationGuide: React.FC<DestinationGuideProps> = ({ destination, onBack }) => {
   const [activeTab, setActiveTab] = useState('overview');
-
-  const destination = {
-    name: 'Barcelona',
-    country: 'Spain',
-    rating: 4.8,
-    image: 'https://images.pexels.com/photos/1388030/pexels-photo-1388030.jpeg?auto=compress&cs=tinysrgb&w=1200',
-    description: 'A vibrant Mediterranean city known for its unique architecture, rich culture, beautiful beaches, and world-class cuisine.',
-    bestTime: 'March - October',
-    temperature: '15-30°C',
-    highlights: [
-      'Sagrada Familia',
-      'Gothic Quarter',
-      'Beach Life',
-      'Tapas Culture',
-      'Park Güell',
-      'La Rambla'
-    ],
-    budget: {
-      budget: '$50-80/day',
-      midRange: '$80-150/day',
-      luxury: '$150+/day'
-    }
-  };
 
   const tabs = [
     { id: 'overview', label: 'Overview', icon: MapPin },
@@ -39,50 +18,254 @@ const DestinationGuide: React.FC<DestinationGuideProps> = ({ onBack }) => {
     { id: 'transport', label: 'Getting Around', icon: Car }
   ];
 
-  const attractions = [
-    {
-      name: 'Sagrada Familia',
-      image: 'https://images.pexels.com/photos/1388030/pexels-photo-1388030.jpeg?auto=compress&cs=tinysrgb&w=400',
-      description: 'Gaudí\'s masterpiece cathedral with stunning architecture',
-      rating: 4.9,
-      duration: '2-3 hours'
-    },
-    {
-      name: 'Park Güell',
-      image: 'https://images.pexels.com/photos/1388030/pexels-photo-1388030.jpeg?auto=compress&cs=tinysrgb&w=400',
-      description: 'Whimsical park with colorful mosaics and city views',
-      rating: 4.7,
-      duration: '2-3 hours'
-    },
-    {
-      name: 'Gothic Quarter',
-      image: 'https://images.pexels.com/photos/1388030/pexels-photo-1388030.jpeg?auto=compress&cs=tinysrgb&w=400',
-      description: 'Medieval neighborhood with narrow streets and historic buildings',
-      rating: 4.6,
-      duration: '3-4 hours'
-    }
-  ];
-
-  const foods = [
-    {
-      name: 'Tapas',
-      image: 'https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=400',
-      description: 'Patatas bravas, jamón ibérico, and croquetas',
-      price: '€8-20'
-    },
-    {
-      name: 'Catalan Cuisine',
-      image: 'https://images.pexels.com/photos/3616956/pexels-photo-3616956.jpeg?auto=compress&cs=tinysrgb&w=400',
-      description: 'Paella, fideuà, and crema catalana',
-      price: '€15-35'
-    },
-    {
-      name: 'Fresh Seafood',
-      image: 'https://images.pexels.com/photos/1213710/pexels-photo-1213710.jpeg?auto=compress&cs=tinysrgb&w=400',
-      description: 'Grilled fish, seafood paella, and fideuà',
-      price: '€20-40'
-    }
-  ];
+  // Attractions and foods by city
+  let attractions = [];
+  let foods = [];
+  switch (destination.name) {
+    case 'Barcelona':
+      attractions = [
+        {
+          name: 'Sagrada Familia',
+          image: 'https://images.pexels.com/photos/1388030/pexels-photo-1388030.jpeg?auto=compress&cs=tinysrgb&w=400',
+          description: 'Gaudí\'s masterpiece cathedral with stunning architecture',
+          rating: 4.9,
+          duration: '2-3 hours'
+        },
+        {
+          name: 'Park Güell',
+          image: 'https://images.pexels.com/photos/1388030/pexels-photo-1388030.jpeg?auto=compress&cs=tinysrgb&w=400',
+          description: 'Whimsical park with colorful mosaics and city views',
+          rating: 4.7,
+          duration: '2-3 hours'
+        },
+        {
+          name: 'Gothic Quarter',
+          image: 'https://images.pexels.com/photos/1388030/pexels-photo-1388030.jpeg?auto=compress&cs=tinysrgb&w=400',
+          description: 'Medieval neighborhood with narrow streets and historic buildings',
+          rating: 4.6,
+          duration: '3-4 hours'
+        }
+      ];
+      foods = [
+        {
+          name: 'Tapas',
+          image: 'https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=400',
+          description: 'Patatas bravas, jamón ibérico, and croquetas',
+          price: '€8-20'
+        },
+        {
+          name: 'Catalan Cuisine',
+          image: 'https://images.pexels.com/photos/3616956/pexels-photo-3616956.jpeg?auto=compress&cs=tinysrgb&w=400',
+          description: 'Paella, fideuà, and crema catalana',
+          price: '€15-35'
+        },
+        {
+          name: 'Fresh Seafood',
+          image: 'https://images.pexels.com/photos/1213710/pexels-photo-1213710.jpeg?auto=compress&cs=tinysrgb&w=400',
+          description: 'Grilled fish, seafood paella, and fideuà',
+          price: '€20-40'
+        }
+      ];
+      break;
+    case 'Kyoto':
+      attractions = [
+        {
+          name: 'Fushimi Inari Shrine',
+          image: 'https://images.pexels.com/photos/161216/torii-gate-shrine-japan-kyoto-161216.jpeg?auto=compress&cs=tinysrgb&w=400',
+          description: 'Famous for its thousands of vermilion torii gates',
+          rating: 4.9,
+          duration: '2 hours'
+        },
+        {
+          name: 'Arashiyama Bamboo Grove',
+          image: 'https://images.pexels.com/photos/402028/pexels-photo-402028.jpeg?auto=compress&cs=tinysrgb&w=400',
+          description: 'A magical bamboo forest path',
+          rating: 4.8,
+          duration: '1 hour'
+        },
+        {
+          name: 'Kinkaku-ji (Golden Pavilion)',
+          image: 'https://images.pexels.com/photos/356830/pexels-photo-356830.jpeg?auto=compress&cs=tinysrgb&w=400',
+          description: 'Iconic Zen Buddhist temple covered in gold leaf',
+          rating: 4.7,
+          duration: '1.5 hours'
+        }
+      ];
+      foods = [
+        {
+          name: 'Kaiseki',
+          image: 'https://images.pexels.com/photos/461382/pexels-photo-461382.jpeg?auto=compress&cs=tinysrgb&w=400',
+          description: 'Traditional multi-course Japanese dinner',
+          price: '¥5000-15000'
+        },
+        {
+          name: 'Yudofu',
+          image: 'https://images.pexels.com/photos/461382/pexels-photo-461382.jpeg?auto=compress&cs=tinysrgb&w=400',
+          description: 'Hot tofu dish, a Kyoto specialty',
+          price: '¥1000-2000'
+        },
+        {
+          name: 'Matcha Sweets',
+          image: 'https://images.pexels.com/photos/461382/pexels-photo-461382.jpeg?auto=compress&cs=tinysrgb&w=400',
+          description: 'Green tea flavored desserts',
+          price: '¥500-1500'
+        }
+      ];
+      break;
+    case 'Machu Picchu':
+      attractions = [
+        {
+          name: 'The Citadel',
+          image: 'https://images.pexels.com/photos/2356045/pexels-photo-2356045.jpeg?auto=compress&cs=tinysrgb&w=400',
+          description: 'Ancient Incan city and UNESCO World Heritage Site',
+          rating: 5.0,
+          duration: '3-4 hours'
+        },
+        {
+          name: 'Huayna Picchu',
+          image: 'https://images.pexels.com/photos/2356045/pexels-photo-2356045.jpeg?auto=compress&cs=tinysrgb&w=400',
+          description: 'Mountain peak with panoramic views',
+          rating: 4.8,
+          duration: '2 hours'
+        },
+        {
+          name: 'Temple of the Sun',
+          image: 'https://images.pexels.com/photos/2356045/pexels-photo-2356045.jpeg?auto=compress&cs=tinysrgb&w=400',
+          description: 'Sacred Incan temple with impressive stonework',
+          rating: 4.7,
+          duration: '1 hour'
+        }
+      ];
+      foods = [
+        {
+          name: 'Cuy (Guinea Pig)',
+          image: 'https://images.pexels.com/photos/461382/pexels-photo-461382.jpeg?auto=compress&cs=tinysrgb&w=400',
+          description: 'Traditional Andean delicacy',
+          price: 'S/40-60'
+        },
+        {
+          name: 'Lomo Saltado',
+          image: 'https://images.pexels.com/photos/461382/pexels-photo-461382.jpeg?auto=compress&cs=tinysrgb&w=400',
+          description: 'Stir-fried beef with vegetables and fries',
+          price: 'S/20-35'
+        },
+        {
+          name: 'Quinoa Soup',
+          image: 'https://images.pexels.com/photos/461382/pexels-photo-461382.jpeg?auto=compress&cs=tinysrgb&w=400',
+          description: 'Nutritious soup made with local quinoa',
+          price: 'S/10-20'
+        }
+      ];
+      break;
+    case 'Maldives':
+      attractions = [
+        {
+          name: 'Overwater Villas',
+          image: 'https://images.pexels.com/photos/1320684/pexels-photo-1320684.jpeg?auto=compress&cs=tinysrgb&w=400',
+          description: 'Iconic luxury villas above turquoise waters',
+          rating: 4.9,
+          duration: 'Overnight'
+        },
+        {
+          name: 'Coral Reefs',
+          image: 'https://images.pexels.com/photos/1320684/pexels-photo-1320684.jpeg?auto=compress&cs=tinysrgb&w=400',
+          description: 'Snorkeling and diving among vibrant marine life',
+          rating: 4.8,
+          duration: '2-3 hours'
+        },
+        {
+          name: 'Sandbank Picnic',
+          image: 'https://images.pexels.com/photos/1320684/pexels-photo-1320684.jpeg?auto=compress&cs=tinysrgb&w=400',
+          description: 'Private picnic on a remote sandbank',
+          rating: 4.7,
+          duration: 'Half day'
+        }
+      ];
+      foods = [
+        {
+          name: 'Mas Huni',
+          image: 'https://images.pexels.com/photos/461382/pexels-photo-461382.jpeg?auto=compress&cs=tinysrgb&w=400',
+          description: 'Tuna, coconut, onion, and chili salad',
+          price: 'MVR 30-50'
+        },
+        {
+          name: 'Garudhiya',
+          image: 'https://images.pexels.com/photos/461382/pexels-photo-461382.jpeg?auto=compress&cs=tinysrgb&w=400',
+          description: 'Fragrant fish soup served with rice',
+          price: 'MVR 40-60'
+        },
+        {
+          name: 'Fihunu Mas',
+          image: 'https://images.pexels.com/photos/461382/pexels-photo-461382.jpeg?auto=compress&cs=tinysrgb&w=400',
+          description: 'Grilled fish with Maldivian spices',
+          price: 'MVR 60-100'
+        }
+      ];
+      break;
+    case 'Cape Town':
+      attractions = [
+        {
+          name: 'Table Mountain',
+          image: 'https://images.pexels.com/photos/356844/pexels-photo-356844.jpeg?auto=compress&cs=tinysrgb&w=400',
+          description: 'Ride the cable car or hike to the top for panoramic views',
+          rating: 4.9,
+          duration: '2-4 hours'
+        },
+        {
+          name: 'Robben Island',
+          image: 'https://images.pexels.com/photos/356844/pexels-photo-356844.jpeg?auto=compress&cs=tinysrgb&w=400',
+          description: 'Historic island prison where Nelson Mandela was held',
+          rating: 4.7,
+          duration: 'Half day'
+        },
+        {
+          name: 'V&A Waterfront',
+          image: 'https://images.pexels.com/photos/356844/pexels-photo-356844.jpeg?auto=compress&cs=tinysrgb&w=400',
+          description: 'Bustling harbor with shops, restaurants, and entertainment',
+          rating: 4.8,
+          duration: '2-3 hours'
+        }
+      ];
+      foods = [
+        {
+          name: 'Braai',
+          image: 'https://images.pexels.com/photos/461382/pexels-photo-461382.jpeg?auto=compress&cs=tinysrgb&w=400',
+          description: 'South African barbecue with grilled meats',
+          price: 'R80-200'
+        },
+        {
+          name: 'Bobotie',
+          image: 'https://images.pexels.com/photos/461382/pexels-photo-461382.jpeg?auto=compress&cs=tinysrgb&w=400',
+          description: 'Spiced minced meat baked with egg-based topping',
+          price: 'R60-120'
+        },
+        {
+          name: 'Cape Malay Curry',
+          image: 'https://images.pexels.com/photos/461382/pexels-photo-461382.jpeg?auto=compress&cs=tinysrgb&w=400',
+          description: 'Aromatic curry with Malay spices',
+          price: 'R70-150'
+        }
+      ];
+      break;
+    default:
+      attractions = [
+        {
+          name: 'Main Attraction',
+          image: destination.image,
+          description: 'Explore the best this destination has to offer!',
+          rating: 4.5,
+          duration: '2 hours'
+        }
+      ];
+      foods = [
+        {
+          name: 'Local Dish',
+          image: destination.image,
+          description: 'Try the local cuisine!',
+          price: 'Varies'
+        }
+      ];
+  }
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -90,7 +273,7 @@ const DestinationGuide: React.FC<DestinationGuideProps> = ({ onBack }) => {
         return (
           <div className="space-y-8">
             <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">About Barcelona</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">About {destination.name}</h3>
               <p className="text-gray-600 leading-relaxed">
                 {destination.description} This cosmopolitan city offers a perfect blend of historic charm, 
                 modern innovation, and Mediterranean lifestyle that enchants every visitor.
@@ -103,11 +286,6 @@ const DestinationGuide: React.FC<DestinationGuideProps> = ({ onBack }) => {
                 <h4 className="font-semibold text-gray-900 mb-2">Best Time to Visit</h4>
                 <p className="text-gray-600">{destination.bestTime}</p>
               </div>
-              <div className="bg-orange-50 p-6 rounded-xl">
-                <Thermometer className="w-8 h-8 text-orange-600 mb-3" />
-                <h4 className="font-semibold text-gray-900 mb-2">Temperature</h4>
-                <p className="text-gray-600">{destination.temperature}</p>
-              </div>
               <div className="bg-green-50 p-6 rounded-xl">
                 <Star className="w-8 h-8 text-green-600 mb-3" />
                 <h4 className="font-semibold text-gray-900 mb-2">Rating</h4>
@@ -117,9 +295,7 @@ const DestinationGuide: React.FC<DestinationGuideProps> = ({ onBack }) => {
                     {[1, 2, 3, 4, 5].map((star) => (
                       <Star
                         key={star}
-                        className={`w-4 h-4 ${
-                          star <= destination.rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'
-                        }`}
+                        className={`w-4 h-4 ${star <= destination.rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}`}
                       />
                     ))}
                   </div>
@@ -135,27 +311,6 @@ const DestinationGuide: React.FC<DestinationGuideProps> = ({ onBack }) => {
                     <span className="text-gray-700 font-medium">{highlight}</span>
                   </div>
                 ))}
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Budget Guide</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="border border-gray-200 rounded-xl p-6">
-                  <h4 className="font-semibold text-gray-900 mb-2">Budget</h4>
-                  <p className="text-2xl font-bold text-green-600 mb-2">{destination.budget.budget}</p>
-                  <p className="text-gray-600 text-sm">Hostels, local food, public transport</p>
-                </div>
-                <div className="border border-gray-200 rounded-xl p-6">
-                  <h4 className="font-semibold text-gray-900 mb-2">Mid-Range</h4>
-                  <p className="text-2xl font-bold text-blue-600 mb-2">{destination.budget.midRange}</p>
-                  <p className="text-gray-600 text-sm">Hotels, restaurants, tours</p>
-                </div>
-                <div className="border border-gray-200 rounded-xl p-6">
-                  <h4 className="font-semibold text-gray-900 mb-2">Luxury</h4>
-                  <p className="text-2xl font-bold text-purple-600 mb-2">{destination.budget.luxury}</p>
-                  <p className="text-gray-600 text-sm">Resorts, fine dining, private tours</p>
-                </div>
               </div>
             </div>
           </div>

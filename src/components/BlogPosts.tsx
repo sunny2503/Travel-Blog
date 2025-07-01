@@ -119,6 +119,108 @@ const BlogPosts: React.FC<BlogPostsProps> = ({ onViewPost }) => {
       readTime: '9 min read',
       likes: 412,
       comments: 67
+    },
+    {
+      id: '7',
+      title: 'Exploring the Fjords of Norway',
+      excerpt: "A breathtaking journey through Norway's dramatic fjords, charming villages, and scenic train rides.",
+      content: 'Full blog post content...',
+      image: 'https://images.pexels.com/photos/417173/pexels-photo-417173.jpeg?auto=compress&cs=tinysrgb&w=800',
+      author: {
+        name: 'Lars Johansen',
+        avatar: 'https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=100'
+      },
+      category: 'destinations',
+      tags: ['Norway', 'Fjords', 'Scenic'],
+      date: '2024-01-02',
+      readTime: '7 min read',
+      likes: 175,
+      comments: 19
+    },
+    {
+      id: '8',
+      title: 'A Weekend in Prague: Castles & Cafés',
+      excerpt: 'Discover the magic of Prague with its fairytale castles, cobblestone streets, and vibrant café culture.',
+      content: 'Full blog post content...',
+      image: 'https://images.pexels.com/photos/208745/pexels-photo-208745.jpeg?auto=compress&cs=tinysrgb&w=800',
+      author: {
+        name: 'Eva Novak',
+        avatar: 'https://images.pexels.com/photos/1130626/pexels-photo-1130626.jpeg?auto=compress&cs=tinysrgb&w=100'
+      },
+      category: 'destinations',
+      tags: ['Prague', 'Europe', 'City Break'],
+      date: '2023-12-28',
+      readTime: '6 min read',
+      likes: 142,
+      comments: 14
+    },
+    {
+      id: '9',
+      title: 'Safari Adventure in Kenya',
+      excerpt: 'Experience the thrill of a Kenyan safari, spotting lions, elephants, and the Great Migration.',
+      content: 'Full blog post content...',
+      image: 'https://images.pexels.com/photos/667205/pexels-photo-667205.jpeg?auto=compress&cs=tinysrgb&w=800',
+      author: {
+        name: 'Amina Njoroge',
+        avatar: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100'
+      },
+      category: 'destinations',
+      tags: ['Kenya', 'Safari', 'Wildlife'],
+      date: '2023-12-20',
+      readTime: '10 min read',
+      likes: 210,
+      comments: 25
+    },
+    {
+      id: '10',
+      title: 'Hanami: Cherry Blossom Traditions in Japan',
+      excerpt: "Experience the beauty and cultural significance of Japan's cherry blossom season, from picnics to poetry.",
+      content: 'Full blog post content...',
+      image: 'https://images.pexels.com/photos/461940/pexels-photo-461940.jpeg?auto=compress&cs=tinysrgb&w=800',
+      author: {
+        name: 'Yuki Tanaka',
+        avatar: 'https://images.pexels.com/photos/1130626/pexels-photo-1130626.jpeg?auto=compress&cs=tinysrgb&w=100'
+      },
+      category: 'culture',
+      tags: ['Japan', 'Cherry Blossoms', 'Tradition'],
+      date: '2024-01-01',
+      readTime: '5 min read',
+      likes: 134,
+      comments: 11
+    },
+    {
+      id: '11',
+      title: 'Carnival in Rio: A Festival of Color',
+      excerpt: 'Dive into the world-famous Rio Carnival, exploring its music, costumes, and vibrant street parades.',
+      content: 'Full blog post content...',
+      image: 'https://images.pexels.com/photos/4666755/pexels-photo-4666755.jpeg?auto=compress&cs=tinysrgb&w=800',
+      author: {
+        name: 'Lucas Silva',
+        avatar: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100'
+      },
+      category: 'culture',
+      tags: ['Brazil', 'Carnival', 'Festival'],
+      date: '2023-12-15',
+      readTime: '8 min read',
+      likes: 198,
+      comments: 22
+    },
+    {
+      id: '12',
+      title: 'Diwali: Festival of Lights in India',
+      excerpt: "Discover the traditions, foods, and celebrations that make Diwali one of India's most cherished festivals.",
+      content: 'Full blog post content...',
+      image: 'https://images.pexels.com/photos/1695052/pexels-photo-1695052.jpeg?auto=compress&cs=tinysrgb&w=800',
+      author: {
+        name: 'Anjali Mehra',
+        avatar: 'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=100'
+      },
+      category: 'culture',
+      tags: ['India', 'Diwali', 'Lights'],
+      date: '2023-11-10',
+      readTime: '6 min read',
+      likes: 156,
+      comments: 18
     }
   ];
 
@@ -208,15 +310,19 @@ const BlogPosts: React.FC<BlogPostsProps> = ({ onViewPost }) => {
 
                 <div className="flex items-center justify-between">
                   <div className="flex flex-wrap gap-2">
-                    {featuredPost.tags.map((tag, index) => (
-                      <span
-                        key={index}
-                        className="bg-sky-50 text-sky-700 px-3 py-1 rounded-full text-sm font-medium flex items-center"
-                      >
-                        <Tag className="w-3 h-3 mr-1" />
-                        {tag}
-                      </span>
-                    ))}
+                    {(featuredPost.tags && featuredPost.tags.length > 0) ? (
+                      featuredPost.tags.map((tag, index) => (
+                        <span
+                          key={index}
+                          className="bg-sky-50 text-sky-700 px-3 py-1 rounded-full text-sm font-medium flex items-center"
+                        >
+                          <Tag className="w-3 h-3 mr-1" />
+                          {tag}
+                        </span>
+                      ))
+                    ) : (
+                      <span className="bg-gray-100 text-gray-400 px-3 py-1 rounded-full text-sm font-medium">No tags</span>
+                    )}
                   </div>
                   
                   <div className="flex items-center space-x-4 text-gray-500">
@@ -281,14 +387,18 @@ const BlogPosts: React.FC<BlogPostsProps> = ({ onViewPost }) => {
 
                 <div className="flex items-center justify-between">
                   <div className="flex flex-wrap gap-1">
-                    {post.tags.slice(0, 2).map((tag, index) => (
-                      <span
-                        key={index}
-                        className="bg-gray-100 text-gray-600 px-2 py-1 rounded-full text-xs"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                    {(post.tags && post.tags.length > 0) ? (
+                      post.tags.slice(0, 2).map((tag, index) => (
+                        <span
+                          key={index}
+                          className="bg-gray-100 text-gray-600 px-2 py-1 rounded-full text-xs"
+                        >
+                          {tag}
+                        </span>
+                      ))
+                    ) : (
+                      <span className="bg-gray-100 text-gray-400 px-2 py-1 rounded-full text-xs">No tags</span>
+                    )}
                   </div>
                   
                   <div className="flex items-center space-x-3 text-gray-500 text-sm">

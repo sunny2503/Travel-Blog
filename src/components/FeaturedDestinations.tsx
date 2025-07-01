@@ -3,7 +3,7 @@ import { MapPin, Star, Users, ArrowRight } from 'lucide-react';
 import { DestinationType } from '../types';
 
 interface FeaturedDestinationsProps {
-  onViewDestination: () => void;
+  onViewDestination: (destination: DestinationType) => void;
 }
 
 const FeaturedDestinations: React.FC<FeaturedDestinationsProps> = ({ onViewDestination }) => {
@@ -51,6 +51,17 @@ const FeaturedDestinations: React.FC<FeaturedDestinationsProps> = ({ onViewDesti
       bestTime: 'November - April',
       rating: 4.6,
       guides: 15
+    },
+    {
+      id: '5',
+      name: 'Cape Town',
+      country: 'South Africa',
+      image: 'https://images.pexels.com/photos/4099235/pexels-photo-4099235.jpeg?auto=compress&cs=tinysrgb&w=800',
+      description: 'A stunning city nestled between mountains and sea, famous for Table Mountain, beaches, and vibrant culture.',
+      highlights: ['Table Mountain', 'Robben Island', 'V&A Waterfront', 'Winelands'],
+      bestTime: 'November - March',
+      rating: 4.7,
+      guides: 22
     }
   ];
 
@@ -73,7 +84,7 @@ const FeaturedDestinations: React.FC<FeaturedDestinationsProps> = ({ onViewDesti
             <div
               key={destination.id}
               className="group cursor-pointer"
-              onClick={onViewDestination}
+              onClick={() => onViewDestination(destination)}
             >
               <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group-hover:-translate-y-2">
                 {/* Image */}
@@ -145,7 +156,7 @@ const FeaturedDestinations: React.FC<FeaturedDestinationsProps> = ({ onViewDesti
         {/* View All Button */}
         <div className="text-center mt-12">
           <button
-            onClick={onViewDestination}
+            onClick={() => onViewDestination(destinations[0])}
             className="inline-flex items-center space-x-2 bg-sky-600 hover:bg-sky-700 text-white px-8 py-3 rounded-full font-semibold transition-colors"
           >
             <span>View All Destinations</span>
