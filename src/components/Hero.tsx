@@ -1,9 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { Search, MapPin, ArrowRight, Star } from 'lucide-react';
 
-const Hero: React.FC = () => {
+const featuredCities = [
+  { name: 'Barcelona', country: 'Spain' },
+  { name: 'Kyoto', country: 'Japan' },
+  { name: 'Machu Picchu', country: 'Peru' },
+  { name: 'Maldives', country: 'Maldives' },
+  { name: 'Cape Town', country: 'South Africa' },
+];
+
+interface HeroProps {
+  onCitySelect?: (city: { name: string; country: string }) => void;
+}
+
+const Hero: React.FC<HeroProps> = ({ onCitySelect }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [filteredCities, setFilteredCities] = useState(featuredCities);
 
   const heroSlides = [
     {
@@ -33,7 +47,25 @@ const Hero: React.FC = () => {
     return () => clearInterval(timer);
   }, []);
 
+  useEffect(() => {
+    setFilteredCities(
+      featuredCities.filter(city =>
+        city.name.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    );
+  }, [searchQuery]);
+
   const currentHero = heroSlides[currentSlide];
+
+  const handleCitySelect = (city: { name: string; country: string }) => {
+    setSearchQuery(city.name);
+    setShowDropdown(false);
+    if (onCitySelect) {
+      onCitySelect(city);
+    } else {
+      console.log('Selected city:', city);
+    }
+  };
 
   return (
     <section className="relative h-screen overflow-hidden">
@@ -77,22 +109,51 @@ const Hero: React.FC = () => {
             {currentHero.subtitle}
           </p>
 
-          {/* Search Bar */}
-          <div className="max-w-2xl mx-auto mb-8">
-            <div className="relative">
+          {/* City Search Bar */}
+          <div className="relative max-w-2xl mx-auto mb-12">
+            <div className="flex items-center bg-white rounded-full shadow border border-sky-200 focus-within:border-sky-400 transition-all duration-200 px-4 h-10">
+              <Search className="w-5 h-5 text-sky-600 mr-2" />
               <input
                 type="text"
-                placeholder="Where do you want to go next?"
+                className="flex-1 bg-transparent outline-none text-gray-800 placeholder-gray-400 text-base h-8"
+                placeholder="Search cities (e.g. Kyoto, Barcelona)"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-6 py-4 pl-12 rounded-full text-gray-900 placeholder-gray-500 shadow-xl focus:outline-none focus:ring-4 focus:ring-sky-500/50 text-lg"
+                onChange={e => {
+                  setSearchQuery(e.target.value);
+                  setShowDropdown(true);
+                }}
+                onFocus={() => setShowDropdown(true)}
+                style={{ boxShadow: 'none' }}
               />
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-              <button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-sky-600 hover:bg-sky-700 text-white px-6 py-2 rounded-full transition-colors flex items-center space-x-2">
-                <span>Search</span>
-                <ArrowRight className="w-4 h-4" />
+              <button
+                type="button"
+                className="ml-2 flex items-center justify-center px-4 h-8 rounded-full bg-sky-500 hover:bg-sky-600 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-sky-400 text-white font-semibold text-sm"
+                onClick={() => {
+                  const match = filteredCities.find(city => city.name.toLowerCase() === searchQuery.trim().toLowerCase());
+                  if (match) {
+                    handleCitySelect(match);
+                  }
+                }}
+                tabIndex={0}
+                aria-label="Search city"
+              >
+                Search
               </button>
             </div>
+            {showDropdown && searchQuery && filteredCities.length > 0 && (
+              <div className="absolute left-0 right-0 bg-white rounded-b-2xl shadow z-30 mt-1 max-h-60 overflow-y-auto border border-t-0 border-sky-200 animate-fade-in">
+                {filteredCities.map(city => (
+                  <button
+                    key={city.name}
+                    className="w-full text-left px-4 py-2 hover:bg-sky-50 text-base text-gray-800 font-normal transition-colors duration-150 flex items-center gap-2"
+                    onClick={() => handleCitySelect(city)}
+                  >
+                    <MapPin className="w-4 h-4 text-sky-500" />
+                    {city.name}, <span className="text-gray-500">{city.country}</span>
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Quick Stats */}

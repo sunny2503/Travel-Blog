@@ -64,7 +64,8 @@ const Search: React.FC<SearchProps> = ({ onBack, onViewPost }) => {
       date: '2024-01-15',
       readTime: '8 min read',
       likes: 342,
-      comments: 28
+      comments: 28,
+      location: 'Bangkok, Thailand'
     },
     {
       id: '2',
@@ -81,7 +82,8 @@ const Search: React.FC<SearchProps> = ({ onBack, onViewPost }) => {
       date: '2024-01-12',
       readTime: '6 min read',
       likes: 128,
-      comments: 15
+      comments: 15,
+      location: 'Scottish Highlands, UK'
     },
     {
       id: '3',
@@ -98,7 +100,8 @@ const Search: React.FC<SearchProps> = ({ onBack, onViewPost }) => {
       date: '2024-01-10',
       readTime: '5 min read',
       likes: 256,
-      comments: 32
+      comments: 32,
+      location: 'Mexico City, Mexico'
     },
     {
       id: '4',
@@ -115,7 +118,98 @@ const Search: React.FC<SearchProps> = ({ onBack, onViewPost }) => {
       date: '2024-01-03',
       readTime: '9 min read',
       likes: 412,
-      comments: 67
+      comments: 67,
+      location: 'Prague, Czech Republic'
+    },
+    {
+      id: '5',
+      title: 'Exploring the Canals of Amsterdam',
+      excerpt: 'A guide to the best canal tours, hidden cafes, and vibrant neighborhoods in Amsterdam.',
+      content: 'Full content...',
+      image: 'https://images.pexels.com/photos/208733/pexels-photo-208733.jpeg?auto=compress&cs=tinysrgb&w=800',
+      author: {
+        name: 'Lotte Janssen',
+        avatar: 'https://images.pexels.com/photos/1130626/pexels-photo-1130626.jpeg?auto=compress&cs=tinysrgb&w=100'
+      },
+      category: 'destinations',
+      tags: ['Amsterdam', 'Canals', 'Culture'],
+      date: '2024-01-20',
+      readTime: '7 min read',
+      likes: 198,
+      comments: 22,
+      location: 'Amsterdam, Netherlands'
+    },
+    {
+      id: '6',
+      title: 'A Weekend in Cape Town',
+      excerpt: 'Experience Table Mountain, local markets, and stunning beaches in Cape Town.',
+      content: 'Full content...',
+      image: 'https://images.pexels.com/photos/35600/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=800',
+      author: {
+        name: 'Sipho Dlamini',
+        avatar: 'https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=100'
+      },
+      category: 'destinations',
+      tags: ['Cape Town', 'Nature', 'Beaches'],
+      date: '2024-01-18',
+      readTime: '6 min read',
+      likes: 175,
+      comments: 19,
+      location: 'Cape Town, South Africa'
+    },
+    {
+      id: '7',
+      title: 'Kyoto in Cherry Blossom Season',
+      excerpt: 'Tips for enjoying hanami, the best parks, and traditional tea houses in Kyoto.',
+      content: 'Full content...',
+      image: 'https://images.pexels.com/photos/356830/pexels-photo-356830.jpeg?auto=compress&cs=tinysrgb&w=800',
+      author: {
+        name: 'Haruka Sato',
+        avatar: 'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=100'
+      },
+      category: 'culture',
+      tags: ['Kyoto', 'Cherry Blossom', 'Japan'],
+      date: '2024-01-08',
+      readTime: '5 min read',
+      likes: 220,
+      comments: 25,
+      location: 'Kyoto, Japan'
+    },
+    {
+      id: '8',
+      title: 'Island Hopping in the Maldives',
+      excerpt: 'Discover the best islands, snorkeling spots, and luxury resorts in the Maldives.',
+      content: 'Full content...',
+      image: 'https://images.pexels.com/photos/1320684/pexels-photo-1320684.jpeg?auto=compress&cs=tinysrgb&w=800',
+      author: {
+        name: 'Aisha Ibrahim',
+        avatar: 'https://images.pexels.com/photos/712513/pexels-photo-712513.jpeg?auto=compress&cs=tinysrgb&w=100'
+      },
+      category: 'adventure',
+      tags: ['Maldives', 'Islands', 'Snorkeling'],
+      date: '2024-01-05',
+      readTime: '8 min read',
+      likes: 305,
+      comments: 30,
+      location: 'Maldives'
+    },
+    {
+      id: '9',
+      title: 'A Foodie's Guide to Jaipur',
+      excerpt: 'Sample the best street food, sweets, and royal cuisine in Jaipur.',
+      content: 'Full content...',
+      image: 'https://images.pexels.com/photos/3401403/pexels-photo-3401403.jpeg?auto=compress&cs=tinysrgb&w=800',
+      author: {
+        name: 'Priya Sharma',
+        avatar: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100'
+      },
+      category: 'food',
+      tags: ['Jaipur', 'Food', 'India'],
+      date: '2024-01-02',
+      readTime: '6 min read',
+      likes: 160,
+      comments: 18,
+      location: 'Jaipur, India'
     }
   ];
 
@@ -136,6 +230,26 @@ const Search: React.FC<SearchProps> = ({ onBack, onViewPost }) => {
   };
 
   const activeFiltersCount = Object.values(selectedFilters).filter(value => value !== 'all').length;
+
+  // Filter logic for search and filters
+  const filteredResults = searchResults.filter((post) => {
+    // Filter by search query
+    const query = searchQuery.trim().toLowerCase();
+    const matchesQuery =
+      query === '' ||
+      post.title.toLowerCase().includes(query) ||
+      post.excerpt.toLowerCase().includes(query) ||
+      (post.tags && post.tags.some((tag) => tag.toLowerCase().includes(query))) ||
+      (post.location && post.location.toLowerCase().includes(query));
+
+    // Filter by category
+    const matchesCategory =
+      selectedFilters.category === 'all' || post.category === selectedFilters.category;
+    // (region, duration, budget filters can be implemented if post has those fields)
+    // For now, only category is matched since sample data only has category
+
+    return matchesQuery && matchesCategory;
+  });
 
   return (
     <div className="min-h-screen bg-gray-50 pt-16">
@@ -159,7 +273,7 @@ const Search: React.FC<SearchProps> = ({ onBack, onViewPost }) => {
             <div className="flex-1 relative">
               <input
                 type="text"
-                placeholder="Search destinations, experiences, tips..."
+                placeholder="Search destinations, experiences, cities..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500 focus:border-transparent text-lg"
@@ -222,7 +336,7 @@ const Search: React.FC<SearchProps> = ({ onBack, onViewPost }) => {
         <div className="bg-white rounded-2xl shadow-sm p-6">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold text-gray-900">
-              Search Results ({searchResults.length})
+              Search Results ({filteredResults.length})
             </h2>
             <select className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-transparent">
               <option>Most Relevant</option>
@@ -234,7 +348,7 @@ const Search: React.FC<SearchProps> = ({ onBack, onViewPost }) => {
 
           {/* Results Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {searchResults.map((post) => (
+            {filteredResults.map((post) => (
               <div
                 key={post.id}
                 className="group cursor-pointer"

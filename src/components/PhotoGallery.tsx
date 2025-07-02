@@ -5,6 +5,7 @@ import { PhotoType } from '../types';
 const PhotoGallery: React.FC = () => {
   const [selectedPhoto, setSelectedPhoto] = useState<PhotoType | null>(null);
   const [activeCategory, setActiveCategory] = useState('all');
+  const [cityQuery, setCityQuery] = useState('');
 
   const categories = [
     { id: 'all', name: 'All Photos' },
@@ -80,6 +81,12 @@ const PhotoGallery: React.FC = () => {
     }
   ];
 
+  // Filter photos by city/location
+  const filteredPhotos = photos.filter(photo =>
+    cityQuery.trim() === '' ||
+    photo.location.toLowerCase().includes(cityQuery.trim().toLowerCase())
+  );
+
   const openLightbox = (photo: PhotoType) => {
     setSelectedPhoto(photo);
     document.body.style.overflow = 'hidden';
@@ -120,9 +127,20 @@ const PhotoGallery: React.FC = () => {
           ))}
         </div>
 
+        {/* City Search Bar */}
+        <div className="flex justify-center mb-8">
+          <input
+            type="text"
+            placeholder="Search by city..."
+            value={cityQuery}
+            onChange={e => setCityQuery(e.target.value)}
+            className="w-full max-w-md px-6 py-3 rounded-full border border-gray-300 focus:ring-2 focus:ring-sky-500 focus:border-transparent text-lg shadow-sm"
+          />
+        </div>
+
         {/* Photo Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {photos.map((photo, index) => (
+          {filteredPhotos.map((photo, index) => (
             <div
               key={photo.id}
               className={`group cursor-pointer overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 ${

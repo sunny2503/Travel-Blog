@@ -14,6 +14,7 @@ export interface BlogPostType {
   readTime: string;
   likes: number;
   comments: number;
+  location?: string;
 }
 
 export interface DestinationType {
